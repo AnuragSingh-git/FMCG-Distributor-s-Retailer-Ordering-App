@@ -2,6 +2,7 @@
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
+const productRoutes = require("./routes/productRoutes");
 
 const connectDB = require("./config/db");
 
@@ -27,6 +28,8 @@ app.get("/api/health", (req, res) => {
     service: "SmartWholesale AI Backend",
   });
 });
+
+app.use("/api/products", productRoutes);
 
 // Connect database before accepting requests
 const startServer = async () => {
