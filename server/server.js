@@ -3,6 +3,8 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 
+const connectDB = require("./config/db");
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -10,7 +12,7 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// Health check route
+// Routes
 app.get("/", (req, res) => {
   res.json({
     success: true,
@@ -18,15 +20,21 @@ app.get("/", (req, res) => {
   });
 });
 
-// API health route
 app.get("/api/health", (req, res) => {
-  res.status(200).json({
+  res.json({
     success: true,
     status: "healthy",
     service: "SmartWholesale AI Backend",
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+// Connect database before accepting requests
+const startServer = async () => {
+  await connectDB();
+
+  app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+  });
+};
+
+startServer();
