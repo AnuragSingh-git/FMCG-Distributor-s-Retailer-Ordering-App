@@ -1,56 +1,54 @@
 
-const mongoose = require("mongoose");
+const express = require("express");
+const Product = require("../models/Product");
 
-const productSchema = new mongoose.Schema(
-  {
-    sku: {
-      type: String,
-      required: true,
-      unique: true,
-      trim: true,
-    },
+const router = express.Router();
 
-    name: {
-      type: String,
-      required: true,
-      trim: true,
-    },
+// GET all active products
+router.get("/", async (req, res) => {
+  try {
+    const products = await Product.find({ isActive: true }).sort({
+      name: 1,
+    });
 
-    category: {
-      type: String,
-      required: true,
-    },
+    res.status(200).json({
+      success: true,
+      count: products.length,
+      products,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch products",
+    });
+  }
+});
 
-    packSize: {
-      type: Number,
-      required: true,
-      min: 1,
-    },
+// GET one product by ID
+router.get("/:id", async (req, res) => {
+  try {
+    const product = await Product.findOne({
+      _id: req.params.id,
+      isActive: true,
+    });
 
-    packUnit: {
-      type: String,
-      required: true,
-      default: "pieces",
-    },
+    if (!product) {
+      return res.status(404).json({
+        success: false,
+        message: "Product not found",
+      });
+    }
 
-    dealerPrice: {
-      type: Number,
-      required: true,
-      min: 0,
-    },
+    res.status(200).json({
+      success: true,
+      product,
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: "Invalid product ID",
+    });
+  }
+});
 
-    stockCases: {
-      type: Number,
-      required: true,
-      min: 0,
-    },
-
-    isActive: {
-      type: Boolean,
-      default: true,
-    },
-  },
-  { timestamps: true }
-);
-
-module.exports = mongoose.model("Product", productSchema);
+module.exports = router;
