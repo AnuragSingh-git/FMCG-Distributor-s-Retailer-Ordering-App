@@ -1,1 +1,1 @@
-﻿# FMCG-Distributor-s-Retailer-Ordering-App for intership assignment done
+﻿# FMCG-Distributor-s-Retailer-Ordering-App for intership assignment
