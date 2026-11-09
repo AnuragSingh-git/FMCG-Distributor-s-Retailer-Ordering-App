@@ -4,6 +4,7 @@ const cors = require("cors");
 require("dotenv").config();
 const productRoutes = require("./routes/productRoutes");
 const orderRoutes = require("./routes/orderRoutes");
+const authRoutes = require("./routes/authRoutes");
 
 const connectDB = require("./config/db");
 
@@ -32,6 +33,7 @@ app.get("/api/health", (req, res) => {
 
 app.use("/api/products", productRoutes);
 app.use("/api/orders", orderRoutes);
+app.use("/api/auth", authRoutes);
 
 // Connect database before accepting requests
 const startServer = async () => {
