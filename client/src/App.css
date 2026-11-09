@@ -261,3 +261,144 @@ h1 {
     padding: 12px;
   }
 }
+
+
+.cart-section {
+  margin-top: 55px;
+  margin-bottom: 60px;
+  background: white;
+  border: 1px solid #e8edf3;
+  border-radius: 14px;
+  padding: 25px;
+}
+
+.cart-heading {
+  margin-bottom: 25px;
+}
+
+.cart-heading h2 {
+  font-size: 23px;
+}
+
+.empty-cart {
+  padding: 30px;
+  background: #f8fafc;
+  border-radius: 10px;
+  text-align: center;
+  color: #667085;
+}
+
+.cart-items {
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr auto;
+  gap: 15px;
+  align-items: center;
+  padding: 18px 0;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.cart-product {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.cart-product span {
+  color: #667085;
+  font-size: 12px;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.quantity-controls button {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #dce3eb;
+  border-radius: 7px;
+  background: white;
+  cursor: pointer;
+}
+
+.quantity-controls button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.remove-button {
+  border: none;
+  background: none;
+  color: #b42318;
+  cursor: pointer;
+}
+
+.cart-total {
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.cart-total div {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.cart-total strong {
+  font-size: 22px;
+}
+
+.place-order-button {
+  background: #176b50;
+  color: white;
+  border: none;
+  border-radius: 9px;
+  padding: 14px 24px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.place-order-button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.success {
+  color: #13734c;
+  background: #e9f7ef;
+  margin-bottom: 20px;
+}
+
+.success h3 {
+  margin-bottom: 8px;
+}
+
+.success p {
+  margin-top: 5px;
+}
+
+@media (max-width: 650px) {
+  .cart-item {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cart-total {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .place-order-button {
+    width: 100%;
+  }
+}
+
