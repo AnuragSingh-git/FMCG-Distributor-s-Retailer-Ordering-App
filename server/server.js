@@ -5,6 +5,8 @@ require("dotenv").config();
 const productRoutes = require("./routes/productRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 const authRoutes = require("./routes/authRoutes");
+const aiRoutes = require("./routes/aiRoutes");
+const whatsappRoutes = require("./routes/whatsappRoutes");
 
 const connectDB = require("./config/db");
 
@@ -13,6 +15,8 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors());
+// Keep the raw body for Meta webhook signature verification.
+app.use("/api/whatsapp/webhook", express.raw({ type: "application/json" }));
 app.use(express.json());
 
 // Routes
@@ -34,6 +38,8 @@ app.get("/api/health", (req, res) => {
 app.use("/api/products", productRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/ai", aiRoutes);
+app.use("/api/whatsapp", whatsappRoutes);
 
 // Connect database before accepting requests
 const startServer = async () => {

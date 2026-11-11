@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const { protect } = require("../middleware/authMiddleware");
+const { normalizePhone } = require("../services/phone");
 
 const router = express.Router();
 
@@ -16,7 +17,7 @@ const createToken = (id) => {
 // Register a retailer
 router.post("/register", async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, phone } = req.body;
 
     if (
       typeof name !== "string" ||
@@ -43,6 +44,8 @@ router.post("/register", async (req, res) => {
     }
 
     const normalizedEmail = email.trim().toLowerCase();
+    const normalizedPhone = phone ? normalizePhone(phone) : null;
+    if (phone && !normalizedPhone) return res.status(400).json({ success: false, message: "Enter a valid phone number with country code." });
 
     const existingUser = await User.findOne({
       email: normalizedEmail,
@@ -62,6 +65,7 @@ router.post("/register", async (req, res) => {
       name: name.trim(),
       email: normalizedEmail,
       password: hashedPassword,
+      phone: normalizedPhone || undefined,
       role: "retailer",
     });
 
@@ -75,13 +79,14 @@ router.post("/register", async (req, res) => {
         name: user.name,
         email: user.email,
         role: user.role,
+        phone: user.phone || "",
       },
     });
   } catch (error) {
     if (error.code === 11000) {
       return res.status(409).json({
         success: false,
-        message: "An account with this email already exists.",
+        message: "An account with this email or WhatsApp number already exists.",
       });
     }
 
@@ -131,6 +136,7 @@ router.post("/login", async (req, res) => {
         name: user.name,
         email: user.email,
         role: user.role,
+        phone: user.phone || "",
       },
     });
   } catch (error) {
@@ -150,8 +156,21 @@ router.get("/me", protect, (req, res) => {
       name: req.user.name,
       email: req.user.email,
       role: req.user.role,
+      phone: req.user.phone || "",
     },
   });
+});
+
+router.patch("/phone", protect, async (req, res) => {
+  const phone = normalizePhone(req.body.phone);
+  if (!phone) return res.status(400).json({ success: false, message: "Enter a valid phone number with country code." });
+  try {
+    req.user.phone = phone;
+    await req.user.save();
+    res.json({ success: true, phone });
+  } catch {
+    res.status(500).json({ success: false, message: "Unable to save phone number." });
+  }
 });
 
 module.exports = router;

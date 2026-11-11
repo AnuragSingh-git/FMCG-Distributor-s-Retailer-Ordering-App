@@ -387,6 +387,49 @@ h1 {
   margin-top: 5px;
 }
 
+.header-actions { display: flex; align-items: center; gap: 16px; }
+.signed-in { color: #344054; font-size: 12px; font-weight: 600; }
+.signout { border: 1px solid #dce3eb; border-radius: 7px; padding: 8px 10px; background: white; color: #475467; font-size: 12px; }
+.capture-panel { margin: 0 0 26px; padding: 22px; border: 1px solid #dce9e2; border-radius: 14px; background: linear-gradient(115deg, #fff 0%, #f1f8f3 100%); text-align: left; }
+.capture-intro { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.capture-intro h2 { margin: 0 0 5px; font-size: 22px; }
+.capture-intro p:not(.eyebrow) { color: #667085; font-size: 13px; }
+.capture-panel .eyebrow { margin-bottom: 5px; }
+.whatsapp-button { display: inline-flex; align-items: center; gap: 8px; border-radius: 8px; padding: 11px 14px; background: #168653; color: white; font-size: 12px; font-weight: 700; text-decoration: none; white-space: nowrap; }
+.whatsapp-button span { font-size: 16px; }
+.integration-badge { padding: 8px 10px; border-radius: 20px; background: #edf1ed; color: #66756a; font-size: 11px; white-space: nowrap; }
+.order-message { display: block; width: 100%; min-height: 80px; resize: vertical; margin: 16px 0 9px; padding: 12px; border: 1px solid #dce3eb; border-radius: 9px; background: white; color: #182230; font-size: 13px; line-height: 1.5; }
+.interpret-button, .add-interpreted { border: 0; border-radius: 8px; padding: 10px 14px; background: #176b50; color: white; font-size: 12px; font-weight: 700; cursor: pointer; }
+.interpret-button:disabled { opacity: .55; cursor: wait; }
+.interpretation { border-top: 1px solid #dce9e2; margin-top: 17px; padding-top: 16px; }
+.interpretation h3 { margin: 0 0 4px; font-size: 16px; }
+.review-note { margin: 0 0 9px; color: #667085; font-size: 11px; }
+.interpreted-line { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 11px 0; border-bottom: 1px solid #e7eee9; }
+.interpreted-line strong, .interpreted-line small { display: block; }
+.interpreted-line strong { font-size: 13px; }
+.interpreted-line small { margin-top: 4px; color: #667085; font-size: 10px; }
+.match-flag, .review-flag { flex: 0 0 auto; padding: 5px 8px; border-radius: 20px; background: #e7f5ec; color: #187346; font-size: 10px; font-weight: 700; }
+.review-flag { background: #fff1d8; color: #986413; }
+.unmatched-line { margin: 9px 0; border-radius: 7px; padding: 10px; background: #fff6e8; color: #835d20; font-size: 11px; }
+.add-interpreted { margin-top: 11px; }
+.order-review-footnote { margin-top: 11px; color: #667085; font-size: 11px; }
+.phone-link-row { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-top: 14px; color: #667085; font-size: 11px; }
+.phone-link-row strong { color: #344054; }
+.phone-link-row label { flex-basis: 100%; }
+.phone-link-row input { min-width: 180px; padding: 8px 10px; border: 1px solid #dce3eb; border-radius: 7px; font-size: 12px; }
+.phone-link-row button { padding: 8px 11px; border: 0; border-radius: 7px; background: #e3eee6; color: #176b50; font-size: 11px; font-weight: 700; }
+.phone-link-row button:disabled { opacity: .5; }
+.auth-page { min-height: 100vh; display: grid; place-items: center; padding: 22px; background: radial-gradient(ellipse at 15% 15%, #e2f3e9, transparent 50%), #f5f7fb; }
+.auth-card { width: min(100%, 430px); padding: 32px; border: 1px solid #e8edf3; border-radius: 16px; background: white; box-shadow: 0 18px 50px #1822300d; text-align: left; }
+.auth-card .brand { margin-bottom: 28px; }
+.auth-card h1 { margin: 0 0 7px; font-size: 30px; }
+.auth-card .subtitle { margin-bottom: 22px; line-height: 1.5; }
+.auth-card label { display: block; margin: 13px 0; color: #475467; font-size: 12px; font-weight: 650; }
+.auth-card label input { display: block; width: 100%; margin-top: 6px; padding: 11px; border: 1px solid #dce3eb; border-radius: 8px; outline-color: #176b50; }
+.auth-submit { width: 100%; margin-top: 8px; }
+.auth-switch { margin-top: 18px; color: #667085; text-align: center; font-size: 12px; }
+.auth-switch button { border: 0; background: transparent; color: #176b50; font-weight: 700; cursor: pointer; }
+
 @media (max-width: 650px) {
   .cart-item {
     grid-template-columns: 1fr 1fr;
@@ -400,5 +443,15 @@ h1 {
   .place-order-button {
     width: 100%;
   }
+}
+
+@media (max-width: 560px) {
+  .header-actions { gap: 7px; }
+  .role-label { display: none; }
+  .signed-in { max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .capture-panel { padding: 16px; }
+  .capture-intro { align-items: flex-start; flex-direction: column; }
+  .whatsapp-button { align-self: stretch; justify-content: center; }
+  .auth-card { padding: 24px 19px; }
 }
 

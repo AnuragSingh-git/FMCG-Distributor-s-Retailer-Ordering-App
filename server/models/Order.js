@@ -59,6 +59,13 @@ const orderSchema = new mongoose.Schema(
       enum: ["pending", "approved", "rejected"],
       default: "pending",
     },
+    source: { type: String, enum: ["web", "whatsapp"], default: "web" },
+    externalMessageId: { type: String, sparse: true, unique: true },
+    retailer: {
+  type: mongoose.Schema.Types.ObjectId,
+  ref: "User",
+  required: true,
+    },
   },
   { timestamps: true }
 );
