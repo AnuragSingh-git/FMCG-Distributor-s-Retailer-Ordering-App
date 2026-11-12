@@ -13,7 +13,6 @@ const connectDB = require("./config/db");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
 app.use(cors());
 // Keep the raw body for Meta webhook signature verification.
 app.use("/api/whatsapp/webhook", express.raw({ type: "application/json" }));
