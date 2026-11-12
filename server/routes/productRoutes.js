@@ -23,7 +23,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-// GET one product by ID
 router.get("/:id", async (req, res) => {
   try {
     const product = await Product.findOne({
