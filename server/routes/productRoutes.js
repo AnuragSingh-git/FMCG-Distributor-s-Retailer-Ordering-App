@@ -4,7 +4,6 @@ const Product = require("../models/Product");
 
 const router = express.Router();
 
-// GET all active products
 router.get("/", async (req, res) => {
   try {
     const products = await Product.find({ isActive: true }).sort({
