@@ -1,1 +1,1 @@
-﻿# FMCG-Distributor-s-Retailer-Ordering-App
+﻿# FMCG-Distributor-s-Retailer-Ordering-App for internship
